@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<launch>
+        <!-- send hyq urdf to param server -->
+        <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find z1_description)/xacro/robot.xacro'"/>
+
+
+        <!-- send hyq semantic description srdf to param server -->
+        <param name="robot_semantic_description" command="$(find xacro)/xacro --inorder '$(find z1_description)/xacro/robot.srdf' " />
+
+
+</launch>
+
