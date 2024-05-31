@@ -114,8 +114,8 @@
     <xacro:property name="GripperMover_Izz" value="0.00035728"/>
 
     <!-- joint limits -->
-    <xacro:property name="jointDamping" value="1.0"/>
-    <xacro:property name="jointFriction" value="1.0"/>
+    <xacro:property name="jointDamping" value="0.0"/>
+    <xacro:property name="jointFriction" value="0.0"/>
 
     <xacro:property name="torqueMax" value="30.0"/>
     <xacro:property name="velocityMax" value="3.1415"/>

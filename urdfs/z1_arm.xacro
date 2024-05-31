@@ -2,14 +2,17 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-
+<xacro:arg name="task_period" default="0.001" />
 
 <xacro:macro name="z1_arm" params="parent *origin" >
+    
 
 
-    <xacro:include filename="$(find z1_description)/xacro/const.xacro"/>
-    <xacro:include filename="$(find z1_description)/xacro/gazebo.xacro"/>
-    <xacro:include filename="$(find z1_description)/xacro/transmission.xacro"/>
+    <xacro:include filename="$(find z1_description)/urdfs/const.xacro"/>
+    <xacro:include filename="$(find z1_description)/gazebo/gazebo.urdf.xacro">
+        <xacro:arg name="task_period" value="$(arg task_period)"/>
+    </xacro:include>
+    <xacro:include filename="$(find z1_description)/urdfs/transmission.xacro"/>
 
     <xacro:arg name="UnitreeGripper" default="false"/>
 
@@ -299,6 +302,7 @@
             </inertial>
         </link>
 
+
         <xacro:motorTransmission name="Gripper"/>
 
         <gazebo reference="gripperStator">
@@ -309,6 +313,17 @@
             <self_collide>true</self_collide>
         </gazebo>
     </xacro:if>
+    
+    <xacro:unless value="$(arg UnitreeGripper)">
+      <joint name="ee_fixed_joint" type="fixed">
+            <origin rpy="0 0 0" xyz="0.051 0.0 0.0"/>
+            <parent link="link06"/>
+            <child link="tool0"/>
+        </joint>
+        <link name="tool0"/>
+
+    </xacro:unless>
+
 
     <xacro:motorTransmission name="1"/>
     <xacro:motorTransmission name="2"/>
